@@ -4,13 +4,11 @@ import {
   createSlice,
 } from '@reduxjs/toolkit';
 import {TEvent} from '_app/components/EventItem/types';
+import {perPage, url} from '_app/constants';
 import {RootState} from '..';
 
-const url = 'https://api.github.com/events';
-const per_page = 25;
-
 export const fetchEvents = createAsyncThunk('events/fetchEvents', async () => {
-  const response = await fetch(url + '?per_page=' + per_page, {
+  const response = await fetch(url + '?per_page=' + perPage, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
