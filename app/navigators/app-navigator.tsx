@@ -1,9 +1,6 @@
 import React from 'react';
-import {useColorScheme} from 'react-native';
 import {
   NavigationContainer,
-  DefaultTheme,
-  DarkTheme,
   createNavigationContainerRef,
 } from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -34,12 +31,8 @@ interface NavigationProps
   extends Partial<React.ComponentProps<typeof NavigationContainer>> {}
 
 export const AppNavigator = (props: NavigationProps) => {
-  const colorScheme = useColorScheme();
   return (
-    <NavigationContainer
-      ref={navigationRef}
-      theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
-      {...props}>
+    <NavigationContainer ref={navigationRef} {...props}>
       <AppStack />
     </NavigationContainer>
   );

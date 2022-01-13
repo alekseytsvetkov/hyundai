@@ -1,13 +1,19 @@
 import {useNavigation} from '@react-navigation/native';
 import React from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
 interface RenderEventItemProps {
   item: TEvent;
 }
 
-type TEvent = {
-  id: string;
+export type TEvent = {
+  id: number;
+  type: string; // Enum
+  actor: any; // TActor
+  repo: any; // TRepo
+  payload: any; // TPayload
+  public: boolean;
+  created_at: string;
 };
 
 export const EventItem: React.FC<RenderEventItemProps> = ({item}) => {
@@ -18,10 +24,16 @@ export const EventItem: React.FC<RenderEventItemProps> = ({item}) => {
   };
 
   return (
-    <TouchableOpacity key={item.id} onPress={onPress}>
+    <TouchableOpacity style={styles.event} key={item.id} onPress={onPress}>
       <View>
         <Text>id: {item.id}</Text>
       </View>
     </TouchableOpacity>
   );
 };
+
+const styles = StyleSheet.create({
+  event: {
+    paddingVertical: 10,
+  },
+});

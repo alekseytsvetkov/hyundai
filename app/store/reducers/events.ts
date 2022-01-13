@@ -1,19 +1,10 @@
+import {TEvent} from '_app/components';
 import {
   createAsyncThunk,
   createEntityAdapter,
   createSlice,
 } from '@reduxjs/toolkit';
 import {RootState} from '..';
-
-interface EventData {
-  id: number;
-  type: string; // Enum
-  actor: any; // TActor
-  repo: any; // TRepo
-  payload: any; // TPayload
-  public: boolean;
-  created_at: string;
-}
 
 const url = 'https://api.github.com/events';
 const per_page = 25;
@@ -25,10 +16,10 @@ export const fetchEvents = createAsyncThunk('events/fetchEvents', async () => {
       'Content-Type': 'application/json',
     },
   });
-  return (await response.json()) as EventData[];
+  return (await response.json()) as TEvent[];
 });
 
-export const eventsAdapter = createEntityAdapter<EventData>();
+export const eventsAdapter = createEntityAdapter<TEvent>();
 
 const eventsSlice = createSlice({
   name: 'events',
