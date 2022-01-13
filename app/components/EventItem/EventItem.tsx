@@ -1,9 +1,10 @@
 import {useNavigation} from '@react-navigation/native';
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RenderEventItemProps} from './types';
 import {NavigatorParamList} from '_app/navigators/types';
+import {Avatar} from '_app/components';
 
 export const EventItem: React.FC<RenderEventItemProps> = ({item}) => {
   const navigation =
@@ -15,10 +16,9 @@ export const EventItem: React.FC<RenderEventItemProps> = ({item}) => {
 
   return (
     <TouchableOpacity style={styles.event} key={item.id} onPress={onPress}>
-      <View>
-        <Text>id: {item.id}</Text>
-        <Text>created: {item.created_at}</Text>
-      </View>
+      <Text>{item.actor?.display_login}</Text>
+      <Avatar item={item} />
+      <Text>{item.type}</Text>
     </TouchableOpacity>
   );
 };
