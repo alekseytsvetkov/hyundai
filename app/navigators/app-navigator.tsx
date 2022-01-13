@@ -5,10 +5,11 @@ import {
 } from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {EventsScreen, EventScreen} from '_app/screens';
+import {TEvent} from '_app/components';
 
 export type NavigatorParamList = {
   events: undefined;
-  event: undefined;
+  event: {item: TEvent};
 };
 
 export const navigationRef = createNavigationContainerRef();

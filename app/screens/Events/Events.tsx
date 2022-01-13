@@ -1,7 +1,7 @@
 import {useFocusEffect, useIsFocused} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
-import {FlatList, View, Text} from 'react-native';
-import {EventItem} from '_app/components';
+import {FlatList} from 'react-native';
+import {EventItem, Loading} from '_app/components';
 import {useAppDispatch, useAppSelector} from '_app/hooks';
 import {RootState} from '_app/store';
 import {fetchEvents, selectAllEvents} from '_app/store/reducers/events';
@@ -18,22 +18,23 @@ export const EventsScreen = () => {
 
   useEffect(() => {
     isFocused && getEvents();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFocused]);
 
   useFocusEffect(
     React.useCallback(() => {
       if (isRefreshing && !isScrolling) {
-        console.log('start interval');
         const intervalId = setInterval(() => {
           getEvents();
         }, 60000);
         return () => clearInterval(intervalId);
       } else {
-        const intervalId = setTimeout(() => {
+        const timeoutId = setTimeout(() => {
           setIsRefreshing(true);
         }, 15000);
-        return () => clearTimeout(intervalId);
+        return () => clearTimeout(timeoutId);
       }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isRefreshing, isScrolling]),
   );
 
@@ -49,11 +50,7 @@ export const EventsScreen = () => {
   };
 
   if (loading) {
-    return (
-      <View>
-        <Text>Loading</Text>
-      </View>
-    );
+    return <Loading />;
   }
 
   return (

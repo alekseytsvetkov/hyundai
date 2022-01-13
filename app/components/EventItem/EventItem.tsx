@@ -1,13 +1,15 @@
 import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {NavigatorParamList} from '_app/navigators';
 
-interface RenderEventItemProps {
+export interface RenderEventItemProps {
   item: TEvent;
 }
 
 export type TEvent = {
-  id: number;
+  id: string;
   type: string; // Enum
   actor: any; // TActor
   repo: any; // TRepo
@@ -17,7 +19,8 @@ export type TEvent = {
 };
 
 export const EventItem: React.FC<RenderEventItemProps> = ({item}) => {
-  const navigation = useNavigation();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<NavigatorParamList>>();
 
   const onPress = () => {
     navigation.navigate('event', {item: item});
@@ -27,6 +30,7 @@ export const EventItem: React.FC<RenderEventItemProps> = ({item}) => {
     <TouchableOpacity style={styles.event} key={item.id} onPress={onPress}>
       <View>
         <Text>id: {item.id}</Text>
+        <Text>created: {item.created_at}</Text>
       </View>
     </TouchableOpacity>
   );
