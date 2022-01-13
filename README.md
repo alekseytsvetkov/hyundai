@@ -23,5 +23,5 @@ yarn android
 
 Start iOS
 ```
-yarn android
+yarn iOS
 ```
