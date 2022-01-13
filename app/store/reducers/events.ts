@@ -1,9 +1,9 @@
-import {TEvent} from '_app/components';
 import {
   createAsyncThunk,
   createEntityAdapter,
   createSlice,
 } from '@reduxjs/toolkit';
+import {TEvent} from '_app/components/EventItem/types';
 import {RootState} from '..';
 
 const url = 'https://api.github.com/events';

@@ -1,12 +1,12 @@
 import {useFocusEffect, useIsFocused} from '@react-navigation/native';
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {FlatList} from 'react-native';
 import {EventItem, Loading} from '_app/components';
 import {useAppDispatch, useAppSelector} from '_app/hooks';
 import {RootState} from '_app/store';
 import {fetchEvents, selectAllEvents} from '_app/store/reducers/events';
 
-export const EventsScreen = () => {
+export const EventsScreen: React.FC = () => {
   const dispatch = useAppDispatch();
   const {loading} = useAppSelector((state: RootState) => state.events);
   const events = useAppSelector(selectAllEvents);
@@ -22,7 +22,7 @@ export const EventsScreen = () => {
   }, [isFocused]);
 
   useFocusEffect(
-    React.useCallback(() => {
+    useCallback(() => {
       if (isRefreshing && !isScrolling) {
         const intervalId = setInterval(() => {
           getEvents();

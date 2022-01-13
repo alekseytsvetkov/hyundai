@@ -5,17 +5,12 @@ import {
 } from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {EventsScreen, EventScreen} from '_app/screens';
-import {TEvent} from '_app/components';
-
-export type NavigatorParamList = {
-  events: undefined;
-  event: {item: TEvent};
-};
+import {NavigatorParamList} from './types';
 
 export const navigationRef = createNavigationContainerRef();
 const Stack = createNativeStackNavigator<NavigatorParamList>();
 
-const AppStack = () => {
+const AppStack: React.FC = () => {
   return (
     <Stack.Navigator
       screenOptions={{

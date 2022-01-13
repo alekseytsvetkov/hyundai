@@ -1,7 +1,7 @@
 import {RouteProp, useRoute} from '@react-navigation/native';
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {NavigatorParamList} from '_app/navigators';
+import {NavigatorParamList} from '_app/navigators/types';
 
 export const EventScreen: React.FC = () => {
   const route = useRoute<RouteProp<NavigatorParamList, 'event'>>();
